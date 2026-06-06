@@ -193,6 +193,7 @@
           <div class="nav-item" data-panel="process"><i class="fas fa-list-ol"></i> Process Steps</div>
           <div class="nav-item" data-panel="testimonials"><i class="fas fa-quote-left"></i> Testimonials</div>
           <div class="nav-item" data-panel="blogs"><i class="fas fa-newspaper"></i> Blog Posts</div>
+          <div class="nav-item" data-panel="projects"><i class="fas fa-th-large"></i> Projects</div>
         </div>
         <div class="nav-group">
           <div class="nav-group-label">Setup</div>
@@ -230,6 +231,7 @@
             <div class="stat-card"><div class="stat-label">Services</div><div class="stat-value" id="stat-services">4</div><i class="fas fa-briefcase stat-icon"></i></div>
             <div class="stat-card"><div class="stat-label">Testimonials</div><div class="stat-value" id="stat-testi">4</div><i class="fas fa-quote-left stat-icon"></i></div>
             <div class="stat-card"><div class="stat-label">Blog Posts</div><div class="stat-value" id="stat-blogs">3</div><i class="fas fa-newspaper stat-icon"></i></div>
+            <div class="stat-card"><div class="stat-label">Projects</div><div class="stat-value" id="stat-projects">6</div><i class="fas fa-th-large stat-icon"></i></div>
           </div>
           <div class="card">
             <div class="card-header"><div><div class="card-title">Quick Actions</div><div class="card-subtitle">Jump to common tasks</div></div></div>
@@ -286,6 +288,27 @@
                 <label class="form-label">Top Bar Tagline</label>
                 <input type="text" id="s-tagline" placeholder="Transforming spaces into extraordinary experiences">
               </div>
+            </div>
+            <div class="section-divider"></div>
+            <div class="card-title" style="margin-bottom:20px">Social Media Links</div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label"><i class="fab fa-facebook" style="color:var(--gold);margin-right:6px"></i> Facebook URL</label>
+                <input type="url" id="s-facebook" placeholder="https://facebook.com/yourpage">
+              </div>
+              <div class="form-group">
+                <label class="form-label"><i class="fab fa-instagram" style="color:var(--gold);margin-right:6px"></i> Instagram URL</label>
+                <input type="url" id="s-instagram" placeholder="https://instagram.com/yourpage">
+              </div>
+              <div class="form-group">
+                <label class="form-label"><i class="fab fa-linkedin" style="color:var(--gold);margin-right:6px"></i> LinkedIn URL</label>
+                <input type="url" id="s-linkedin" placeholder="https://linkedin.com/company/yourpage">
+              </div>
+              <div class="form-group">
+                <label class="form-label"><i class="fab fa-twitter" style="color:var(--gold);margin-right:6px"></i> Twitter / X URL</label>
+                <input type="url" id="s-twitter" placeholder="https://twitter.com/yourpage">
+              </div>
+            <div style="display:none"><!-- close grid workaround -->
             </div>
             <div class="section-divider"></div>
             <div class="card-title" style="margin-bottom:20px">About Section</div>
@@ -521,7 +544,65 @@
           </div>
         </div>
 
-        <!-- ── SETUP ── -->
+        <!-- ── PROJECTS ── -->
+        <div class="panel" id="panel-projects">
+          <div class="card">
+            <div class="card-header">
+              <div><div class="card-title">Projects</div><div class="card-subtitle">Manage your portfolio projects</div></div>
+              <button class="btn btn-primary" onclick="openProjectForm()"><i class="fas fa-plus"></i> Add Project</button>
+            </div>
+            <div class="table-wrap">
+              <table><thead><tr><th>Image</th><th>Title</th><th>Category</th><th>Location</th><th>Featured</th><th>Actions</th></tr></thead>
+              <tbody id="projects-tbody"></tbody></table>
+            </div>
+          </div>
+          <div class="card" id="project-form-card" style="display:none">
+            <div class="card-header">
+              <div class="card-title" id="project-form-title">Add Project</div>
+              <button class="btn btn-secondary btn-sm" onclick="closeProjectForm()"><i class="fas fa-times"></i> Cancel</button>
+            </div>
+            <input type="hidden" id="project-id">
+            <div class="form-grid">
+              <div class="form-group full">
+                <label class="form-label">Project Image URL</label>
+                <input type="url" id="project-image" placeholder="https://cloudinary.com/project.jpg" oninput="previewImg(this,'project-img-preview')">
+                <div class="img-url-help">Upload to <a href="https://cloudinary.com" target="_blank">Cloudinary</a> → paste URL</div>
+                <div id="project-img-preview" class="img-preview-empty"><i class="fas fa-image" style="margin-right:8px"></i> Preview will appear here</div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Project Title</label>
+                <input type="text" id="project-title" placeholder="Silver Tower Penthouse">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Location</label>
+                <input type="text" id="project-location" placeholder="Business Bay, Dubai">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Category</label>
+                <select id="project-category">
+                  <option value="residential">Residential</option>
+                  <option value="commercial">Commercial</option>
+                  <option value="hospitality">Hospitality</option>
+                  <option value="renovation">Renovation</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Featured?</label>
+                <select id="project-featured">
+                  <option value="false">No</option>
+                  <option value="true">Yes — show Featured badge</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Sort Order</label>
+                <input type="text" id="project-order" placeholder="1">
+              </div>
+            </div>
+            <button class="btn btn-primary" onclick="saveProject()"><i class="fas fa-save"></i> Save Project</button>
+          </div>
+        </div>
+
+<!-- ── SETUP ── -->
         <div class="panel" id="panel-setup">
           <div class="card">
             <div class="card-header"><div class="card-title">Supabase Database Setup</div></div>
@@ -645,6 +726,14 @@ create policy "Public read" on settings for select using (true);</pre>
       { id:'b2', title:'How to Choose the Perfect Color Palette', excerpt:'A guide to selecting colors that create harmony.', image_url:'https://design.eliquick.com/uploads/blogs/1771399497_Screenshot 2026-02-18 at 11.23.51 AM.jpg', category:'Design Tips', author:'Admin', published_date:'2026-01-25', slug:'#', sort_order:2 },
       { id:'b3', title:'Maximizing Small Spaces: Clever Decor Ideas', excerpt:'Transform compact areas into functional spaces.', image_url:'https://design.eliquick.com/uploads/blogs/1771399696_Screenshot 2026-02-18 at 11.25.51 AM.jpg', category:'Home Decor', author:'Admin', published_date:'2026-01-15', slug:'#', sort_order:3 },
     ],
+    projects: [
+      { id:'pr1', title:'Silver Tower Penthouse', category:'residential', location:'Business Bay, Dubai', image_url:'https://design.eliquick.com/uploads/home_sliders/image_1771309912.jpg', featured:true, sort_order:1 },
+      { id:'pr2', title:'Downtown Office Fit-Out', category:'commercial', location:'Downtown Dubai', image_url:'https://design.eliquick.com/uploads/home_sliders/2.jpg', featured:false, sort_order:2 },
+      { id:'pr3', title:'Marina Bay Restaurant', category:'hospitality', location:'Dubai Marina', image_url:'https://design.eliquick.com/uploads/home_sliders/image_1771309775.jpg', featured:true, sort_order:3 },
+      { id:'pr4', title:'JBR Apartment Renovation', category:'renovation', location:'Jumeirah Beach, Dubai', image_url:'https://design.eliquick.com/uploads/home_sliders/4.jpg', featured:false, sort_order:4 },
+      { id:'pr5', title:'Palm Jumeirah Villa', category:'residential', location:'Palm Jumeirah, Dubai', image_url:'https://design.eliquick.com/uploads/home_sliders/image_1771309912.jpg', featured:true, sort_order:5 },
+      { id:'pr6', title:'DIFC Corporate HQ', category:'commercial', location:'DIFC, Dubai', image_url:'https://design.eliquick.com/uploads/home_sliders/2.jpg', featured:false, sort_order:6 },
+    ],
     settings: { logo_url:'https://design.eliquick.com/uploads/logos/logo_1770635080.png', phone:'+971 50 117 2630', email:'info@spaceointeriors.com', address:'2506, Silver Tower, Business Bay, Dubai, UAE', tagline:'Transforming spaces into extraordinary experiences', about_image:'https://design.eliquick.com/uploads/home_sliders/image_1771309775.jpg', about_since:'Creating beautiful spaces since 2012', about_director:'Mr. Supreet, Managing Director', about_text1:'We are passionate about transforming spaces into beautiful, functional environments.', about_text2:'With attention to detail and commitment to quality, we work closely with clients.' }
   };
 
@@ -658,7 +747,7 @@ create policy "Public read" on settings for select using (true);</pre>
   }
 
   // ── PANEL NAV ──
-  const panelTitles = { dashboard:'Dashboard', settings:'Site Settings', sliders:'Hero Slider', services:'Services', process:'Process Steps', testimonials:'Testimonials', blogs:'Blog Posts', setup:'Supabase Setup' };
+  const panelTitles = { dashboard:'Dashboard', settings:'Site Settings', sliders:'Hero Slider', services:'Services', process:'Process Steps', testimonials:'Testimonials', blogs:'Blog Posts', projects:'Projects', setup:'Supabase Setup' };
   window.showPanel = function(name) {
     document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
     document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
@@ -740,18 +829,20 @@ create policy "Public read" on settings for select using (true);</pre>
 
   // ── LOAD ALL ──
   async function loadAllData() {
-    const [sliders, services, process, testimonials, blogs] = await Promise.all([
-      dbGet('sliders'), dbGet('services'), dbGet('process'), dbGet('testimonials'), dbGet('blogs')
+    const [sliders, services, process, testimonials, blogs, projects] = await Promise.all([
+      dbGet('sliders'), dbGet('services'), dbGet('process'), dbGet('testimonials'), dbGet('blogs'), dbGet('projects')
     ]);
     document.getElementById('stat-sliders').textContent = sliders.length;
     document.getElementById('stat-services').textContent = services.length;
     document.getElementById('stat-testi').textContent = testimonials.length;
     document.getElementById('stat-blogs').textContent = blogs.length;
+    document.getElementById('stat-projects').textContent = projects.length;
     renderSlidersTable(sliders);
     renderServicesTable(services);
     renderProcessTable(process);
     renderTestimonialsTable(testimonials);
     renderBlogsTable(blogs);
+    renderProjectsTable(projects);
     loadSettings();
   }
 
@@ -876,6 +967,51 @@ create policy "Public read" on settings for select using (true);</pre>
     document.getElementById('blogs-tbody').innerHTML = data.map(b => `<tr><td><img src="${b.image_url}" class="td-img"></td><td style="color:var(--white);font-weight:500;max-width:240px">${b.title}</td><td><span class="badge badge-success">${b.category||''}</span></td><td>${b.published_date||''}</td><td><div style="display:flex;gap:8px"><button class="btn btn-secondary btn-sm btn-icon" onclick='openBlogForm(${JSON.stringify(b).replace(/'/g,"&#39;").replace(/"/g,"&quot;")})'><i class="fas fa-edit"></i></button><button class="btn btn-danger btn-sm btn-icon" onclick="deleteItem('blogs','${b.id}')"><i class="fas fa-trash"></i></button></div></td></tr>`).join('');
   }
 
+  // ══ PROJECTS ══
+  window.openProjectForm = function(item=null) {
+    document.getElementById('project-form-card').style.display='block';
+    document.getElementById('project-form-title').textContent = item ? 'Edit Project' : 'Add Project';
+    document.getElementById('project-id').value       = item?.id||'';
+    document.getElementById('project-image').value    = item?.image_url||'';
+    document.getElementById('project-title').value    = item?.title||'';
+    document.getElementById('project-location').value = item?.location||'';
+    document.getElementById('project-category').value = item?.category||'residential';
+    document.getElementById('project-featured').value = item?.featured ? 'true' : 'false';
+    document.getElementById('project-order').value    = item?.sort_order||'';
+    const prev = document.getElementById('project-img-preview');
+    prev.innerHTML = item?.image_url ? `<img src="${item.image_url}" class="img-preview">` : '<i class="fas fa-image" style="margin-right:8px"></i> Preview will appear here';
+    document.getElementById('project-form-card').scrollIntoView({behavior:'smooth'});
+  };
+  window.closeProjectForm = () => document.getElementById('project-form-card').style.display='none';
+  window.saveProject = async function() {
+    const row = {
+      id: document.getElementById('project-id').value||undefined,
+      title: document.getElementById('project-title').value,
+      location: document.getElementById('project-location').value,
+      category: document.getElementById('project-category').value,
+      image_url: document.getElementById('project-image').value,
+      featured: document.getElementById('project-featured').value === 'true',
+      sort_order: parseInt(document.getElementById('project-order').value)||0
+    };
+    if (!row.title||!row.image_url) { toast('Title and Image URL required','error'); return; }
+    if (await dbUpsert('projects', row)) { toast('Project saved!'); window.closeProjectForm(); renderProjectsTable(await dbGet('projects')); }
+  };
+  function renderProjectsTable(data) {
+    const categoryColors = { residential:'#22c55e', commercial:'#3b82f6', hospitality:'#f59e0b', renovation:'#8b5cf6' };
+    document.getElementById('projects-tbody').innerHTML = data.map(p => `
+      <tr>
+        <td><img src="${p.image_url}" class="td-img"></td>
+        <td style="color:var(--white);font-weight:500">${p.title}</td>
+        <td><span class="badge" style="background:rgba(${p.category==='residential'?'34,197,94':p.category==='commercial'?'59,130,246':p.category==='hospitality'?'245,158,11':'139,92,246'},.1);color:${categoryColors[p.category]||'#fff'}">${p.category}</span></td>
+        <td>${p.location||''}</td>
+        <td>${p.featured ? '<span class="badge badge-success">Yes</span>' : '<span style="color:var(--text-muted);font-size:12px">No</span>'}</td>
+        <td><div style="display:flex;gap:8px">
+          <button class="btn btn-secondary btn-sm btn-icon" onclick='openProjectForm(${JSON.stringify(p).replace(/\'/g,"&#39;").replace(/"/g,"&quot;")})'><i class="fas fa-edit"></i></button>
+          <button class="btn btn-danger btn-sm btn-icon" onclick="deleteItem('projects','${p.id}')"><i class="fas fa-trash"></i></button>
+        </div></td>
+      </tr>`).join('');
+  }
+
   // ══ SETTINGS ══
   async function loadSettings() {
     let s = store.settings;
@@ -895,12 +1031,16 @@ create policy "Public read" on settings for select using (true);</pre>
     document.getElementById('s-director').value     = s.about_director||'';
     document.getElementById('s-about-text1').value  = s.about_text1||'';
     document.getElementById('s-about-text2').value  = s.about_text2||'';
+    document.getElementById('s-facebook').value  = s.facebook||'https://facebook.com/';
+    document.getElementById('s-instagram').value = s.instagram||'https://instagram.com/';
+    document.getElementById('s-linkedin').value  = s.linkedin||'https://linkedin.com/';
+    document.getElementById('s-twitter').value   = s.twitter||'https://twitter.com/';
     if (s.logo_url) document.getElementById('s-logo-preview').innerHTML = `<img src="${s.logo_url}" class="img-preview">`;
     if (s.about_image) document.getElementById('s-about-preview').innerHTML = `<img src="${s.about_image}" class="img-preview">`;
   }
 
   window.saveSettings = async function() {
-    const fields = { logo_url:'s-logo', phone:'s-phone', email:'s-email', address:'s-address', tagline:'s-tagline', about_image:'s-about-image', about_since:'s-since', about_director:'s-director', about_text1:'s-about-text1', about_text2:'s-about-text2' };
+    const fields = { logo_url:'s-logo', phone:'s-phone', email:'s-email', address:'s-address', tagline:'s-tagline', about_image:'s-about-image', about_since:'s-since', about_director:'s-director', about_text1:'s-about-text1', about_text2:'s-about-text2', facebook:'s-facebook', instagram:'s-instagram', linkedin:'s-linkedin', twitter:'s-twitter' };
     if (!sb) {
       Object.entries(fields).forEach(([k,id]) => store.settings[k] = document.getElementById(id).value);
       toast('Settings saved locally!'); return;

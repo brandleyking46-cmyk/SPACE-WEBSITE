@@ -205,9 +205,9 @@
   <div class="top-bar-inner">
     <span id="site-tagline">Transforming spaces into extraordinary experiences</span>
     <div class="top-bar-social">
-      <a href="#"><i class="fab fa-facebook-f"></i></a>
-      <a href="#"><i class="fab fa-instagram"></i></a>
-      <a href="#"><i class="fab fa-linkedin-in"></i></a>
+      <a href="#" class="social-facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" class="social-instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="#" class="social-linkedin" target="_blank"><i class="fab fa-linkedin-in"></i></a>
     </div>
   </div>
 </div>
@@ -489,10 +489,10 @@ document.addEventListener('DOMContentLoaded', () => {
       <h4>Connect With Us</h4>
       <p style="font-size:13.5px;line-height:1.7;margin-bottom:16px;">Follow us on social media for latest updates and projects.</p>
       <div class="social-row">
-        <a class="social-btn" href="#"><i class="fab fa-facebook-f"></i></a>
-        <a class="social-btn" href="#"><i class="fab fa-twitter"></i></a>
-        <a class="social-btn" href="#"><i class="fab fa-instagram"></i></a>
-        <a class="social-btn" href="#"><i class="fab fa-linkedin-in"></i></a>
+        <a class="social-btn social-facebook" href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a class="social-btn social-twitter" href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+        <a class="social-btn social-instagram" href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a class="social-btn social-linkedin" href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
       </div>
     </div>
   </div>
@@ -544,7 +544,7 @@ document.addEventListener('DOMContentLoaded', () => {
       { title:'How to Choose the Perfect Color Palette for Your Home', excerpt:'A guide to selecting colors that create harmony and reflect your personality.', image_url:'https://design.eliquick.com/uploads/blogs/1771399497_Screenshot 2026-02-18 at 11.23.51 AM.jpg', category:'Design Tips', author:'Admin', published_date:'2026-01-25', slug:'#' },
       { title:'Maximizing Small Spaces: Clever Decor Ideas', excerpt:'Transform compact areas into functional, stylish spaces with smart design solutions.', image_url:'https://design.eliquick.com/uploads/blogs/1771399696_Screenshot 2026-02-18 at 11.25.51 AM.jpg', category:'Home Decor', author:'Admin', published_date:'2026-01-15', slug:'#' },
     ],
-    settings: { address:'2506, Silver Tower, Business Bay, Dubai, UAE', phone:'+971 50 117 2630', email:'info@spaceointeriors.com', logo_url:'https://design.eliquick.com/uploads/logos/logo_1770635080.png', tagline:'Transforming spaces into extraordinary experiences', about_image:'https://design.eliquick.com/uploads/home_sliders/image_1771309775.jpg', about_since:'Creating beautiful spaces since 2012', about_director:'Mr. Supreet, Managing Director', about_text1:'We are passionate about transforming spaces into beautiful, functional environments. Our team of skilled designers combines creativity with practicality to deliver exceptional interior solutions.', about_text2:'With attention to detail and commitment to quality, we work closely with clients to understand their vision and bring it to life through innovative design concepts.' }
+    settings: { address:'2506, Silver Tower, Business Bay, Dubai, UAE', phone:'+971 50 117 2630', email:'info@spaceointeriors.com', logo_url:'https://design.eliquick.com/uploads/logos/logo_1770635080.png', tagline:'Transforming spaces into extraordinary experiences', about_image:'https://design.eliquick.com/uploads/home_sliders/image_1771309775.jpg', about_since:'Creating beautiful spaces since 2012', about_director:'Mr. Supreet, Managing Director', about_text1:'We are passionate about transforming spaces into beautiful, functional environments. Our team of skilled designers combines creativity with practicality to deliver exceptional interior solutions.', about_text2:'With attention to detail and commitment to quality, we work closely with clients to understand their vision and bring it to life through innovative design concepts.', facebook:'https://facebook.com/', instagram:'https://instagram.com/', linkedin:'https://linkedin.com/', twitter:'https://twitter.com/' }
   };
 
   async function fetchOrDefault(table) {
@@ -630,6 +630,11 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('footer-phone').textContent = s.phone||'';
     document.getElementById('footer-email').textContent = s.email||'';
     if (s.logo_url) { document.getElementById('site-logo').src = s.logo_url; document.getElementById('footer-logo').src = s.logo_url; }
+    // Update all social links
+    document.querySelectorAll('.social-facebook').forEach(el => el.href = s.facebook||'#');
+    document.querySelectorAll('.social-instagram').forEach(el => el.href = s.instagram||'#');
+    document.querySelectorAll('.social-linkedin').forEach(el => el.href = s.linkedin||'#');
+    document.querySelectorAll('.social-twitter').forEach(el => el.href = s.twitter||'#');
   }
 
   async function init() {
@@ -678,8 +683,8 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 <!-- BLOG MODAL -->
-<div id="blog-modal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.85);overflow-y:auto;padding:40px 20px">
-  <div style="max-width:780px;margin:0 auto;background:#fff;position:relative">
+<div id="blog-modal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.85);overflow-y:auto;padding:40px 20px;-webkit-overflow-scrolling:touch">
+  <div style="max-width:780px;margin:0 auto;background:#fff;position:relative;max-height:90vh;overflow-y:auto;">
     <button onclick="closeBlogModal()" style="position:absolute;top:16px;right:16px;background:var(--gold);border:none;color:#fff;width:36px;height:36px;font-size:18px;cursor:pointer;z-index:10;display:flex;align-items:center;justify-content:center"><i class="fas fa-times"></i></button>
     <div id="blog-modal-img-wrap">
       <img id="blog-modal-img" src="" alt="" style="width:100%;height:360px;object-fit:cover;display:block">
