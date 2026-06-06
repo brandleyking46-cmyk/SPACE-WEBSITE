@@ -573,7 +573,7 @@ document.addEventListener('DOMContentLoaded', () => {
     container.innerHTML = '';
     dotsEl.innerHTML = '';
     sliders.forEach((s, i) => {
-      container.innerHTML += `<div class="slide ${i===0?'active':''}"><img src="${s.image_url}" alt="${s.title}"><div class="slide-overlay"></div><div class="slide-content"><p class="slide-eyebrow">${s.subtitle||''}</p><h1 class="slide-title">${s.title}</h1><p class="slide-text">${s.description}</p><div class="slide-btn"><a class="btn-gold" href="${s.btn_link||'#about'}" onclick="if(this.getAttribute('href').startsWith('#')){event.preventDefault();document.querySelector(this.getAttribute('href')).scrollIntoView({behavior:'smooth'})}">${s.btn_text||'Learn More'} <i class="fas fa-arrow-right"></i></a></div></div></div>`;
+      container.innerHTML += `<div class="slide ${i===0?'active':''}"><img src="${s.image_url}" alt="${s.title}"><div class="slide-overlay"></div><div class="slide-content"><p class="slide-eyebrow">${s.subtitle||''}</p><h1 class="slide-title">${s.title}</h1><p class="slide-text">${s.description}</p><div class="slide-btn"><a class="btn-gold" href="${s.btn_link||'#about'}" data-scroll="true">${s.btn_text||'Learn More'} <i class="fas fa-arrow-right"></i></a></div></div></div>`;
       dotsEl.innerHTML += `<div class="dot ${i===0?'active':''}" onclick="goSlide(${i})"></div>`;
     });
     initSlider(sliders.length);
@@ -676,6 +676,19 @@ document.addEventListener('DOMContentLoaded', () => {
     clearInterval(sliderTimer);
     sliderTimer = setInterval(() => goSlide(current + 1), 5500);
   }
+  // Smooth scroll for all slider buttons and nav links
+  document.addEventListener('click', function(e) {
+    const link = e.target.closest('a[href^="#"]');
+    if (!link) return;
+    const href = link.getAttribute('href');
+    if (href === '#') return;
+    const target = document.querySelector(href);
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+
   document.getElementById('navToggle').addEventListener('click', () => document.getElementById('main-nav').classList.toggle('open'));
   const scrollBtn = document.getElementById('scrollTop');
   window.addEventListener('scroll', () => scrollBtn.classList.toggle('visible', window.scrollY > 400));
