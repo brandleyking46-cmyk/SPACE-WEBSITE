@@ -224,6 +224,7 @@
         <li><a href="#about">About Us</a></li>
         <li><a href="#services">Services</a></li>
         <li><a href="#process">Process</a></li>
+        <li><a href="#projects">Projects</a></li>
         <li><a href="#blog">Blog</a></li>
         <li class="nav-cta"><a href="#contact">Contact</a></li>
       </ul>
@@ -297,6 +298,155 @@
     <div class="process-steps" id="process-container"></div>
   </div>
 </section>
+
+
+<!-- PROJECTS -->
+<section style="padding:110px 0;background:var(--white)" id="projects">
+  <div style="max-width:1200px;margin:0 auto;padding:0 24px">
+    <div style="text-align:center;margin-bottom:56px">
+      <p style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:14px">Our Portfolio</p>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(34px,4vw,52px);font-weight:300;color:var(--dark);line-height:1.1;margin-bottom:20px">Featured <span style="font-style:italic;color:var(--gold)">Projects</span></h2>
+      <p style="font-size:14.5px;line-height:1.8;color:var(--text);max-width:520px;margin:0 auto">A selection of our finest interior design and fit-out work across Dubai and the UAE.</p>
+    </div>
+
+    <!-- Filter Tabs -->
+    <div style="display:flex;justify-content:center;gap:12px;margin-bottom:44px;flex-wrap:wrap" id="project-filters">
+      <button onclick="filterProjects('all')" class="proj-filter active" data-filter="all">All Projects</button>
+      <button onclick="filterProjects('residential')" class="proj-filter" data-filter="residential">Residential</button>
+      <button onclick="filterProjects('commercial')" class="proj-filter" data-filter="commercial">Commercial</button>
+      <button onclick="filterProjects('hospitality')" class="proj-filter" data-filter="hospitality">Hospitality</button>
+      <button onclick="filterProjects('renovation')" class="proj-filter" data-filter="renovation">Renovation</button>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px" id="projects-grid"></div>
+
+    <div style="text-align:center;margin-top:48px">
+      <a href="#contact" style="display:inline-flex;align-items:center;gap:10px;background:var(--gold);color:#fff;font-size:12px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;padding:14px 36px;transition:background .3s" onmouseover="this.style.background='#0e0e0e'" onmouseout="this.style.background='var(--gold)'">Start Your Project <i class="fas fa-arrow-right"></i></a>
+    </div>
+  </div>
+</section>
+
+<style>
+.proj-filter {
+  background: transparent;
+  border: 1px solid #e0d8d0;
+  color: var(--text);
+  padding: 9px 22px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: all .3s;
+}
+.proj-filter:hover, .proj-filter.active {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #fff;
+}
+.proj-card {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+.proj-card img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  display: block;
+  transition: transform .6s ease;
+}
+.proj-card:hover img { transform: scale(1.07); }
+.proj-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(10,10,10,.85) 30%, transparent);
+  opacity: 0;
+  transition: opacity .4s;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 24px;
+}
+.proj-card:hover .proj-card-overlay { opacity: 1; }
+.proj-card-tag {
+  font-size: 10px;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+.proj-card-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 400;
+  color: #fff;
+  margin-bottom: 4px;
+}
+.proj-card-location {
+  font-size: 12px;
+  color: rgba(255,255,255,.65);
+}
+.proj-card-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: var(--gold);
+  color: #fff;
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  font-weight: 500;
+}
+@media(max-width:768px) {
+  #projects-grid { grid-template-columns: 1fr !important; }
+}
+@media(max-width:1024px) {
+  #projects-grid { grid-template-columns: repeat(2,1fr); }
+}
+</style>
+
+<script>
+const DEFAULT_PROJECTS = [
+  { id:'pr1', title:'Silver Tower Penthouse', category:'residential', location:'Business Bay, Dubai', image_url:'https://design.eliquick.com/uploads/home_sliders/image_1771309912.jpg', featured:true },
+  { id:'pr2', title:'Downtown Office Fit-Out', category:'commercial', location:'Downtown Dubai', image_url:'https://design.eliquick.com/uploads/home_sliders/2.jpg', featured:false },
+  { id:'pr3', title:'Marina Bay Restaurant', category:'hospitality', location:'Dubai Marina', image_url:'https://design.eliquick.com/uploads/home_sliders/image_1771309775.jpg', featured:true },
+  { id:'pr4', title:'JBR Apartment Renovation', category:'renovation', location:'Jumeirah Beach, Dubai', image_url:'https://design.eliquick.com/uploads/home_sliders/4.jpg', featured:false },
+  { id:'pr5', title:'Palm Jumeirah Villa', category:'residential', location:'Palm Jumeirah, Dubai', image_url:'https://design.eliquick.com/uploads/home_sliders/image_1771309912.jpg', featured:true },
+  { id:'pr6', title:'DIFC Corporate HQ', category:'commercial', location:'DIFC, Dubai', image_url:'https://design.eliquick.com/uploads/home_sliders/2.jpg', featured:false },
+];
+
+let allProjects = DEFAULT_PROJECTS;
+let activeFilter = 'all';
+
+function renderProjects(projects) {
+  const grid = document.getElementById('projects-grid');
+  const filtered = activeFilter === 'all' ? projects : projects.filter(p => p.category === activeFilter);
+  grid.innerHTML = filtered.map(p => `
+    <div class="proj-card">
+      <img src="${p.image_url}" alt="${p.title}">
+      ${p.featured ? '<div class="proj-card-badge">Featured</div>' : ''}
+      <div class="proj-card-overlay">
+        <p class="proj-card-tag">${p.category}</p>
+        <h3 class="proj-card-title">${p.title}</h3>
+        <p class="proj-card-location"><i class="fas fa-map-marker-alt" style="margin-right:6px;color:var(--gold)"></i>${p.location}</p>
+      </div>
+    </div>`).join('');
+}
+
+function filterProjects(filter) {
+  activeFilter = filter;
+  document.querySelectorAll('.proj-filter').forEach(b => b.classList.toggle('active', b.dataset.filter === filter));
+  renderProjects(allProjects);
+}
+
+// Load projects - try Supabase first, fall back to defaults
+document.addEventListener('DOMContentLoaded', () => {
+  renderProjects(DEFAULT_PROJECTS);
+});
+</script>
 
 <!-- TESTIMONIALS -->
 <section class="testimonials" id="testimonials">
@@ -444,9 +594,25 @@
   function renderBlogs(posts) {
     document.getElementById('blog-container').innerHTML = posts.map(b => {
       const d = new Date(b.published_date);
-      const day = d.getDate();
-      const mon = d.toLocaleString('en',{month:'short'}).toUpperCase()+' '+d.getFullYear();
-      return `<div class="blog-card"><div class="blog-card-img"><img src="${b.image_url}" alt="${b.title}"><div class="blog-date"><strong>${day}</strong><span>${mon}</span></div></div><div class="blog-card-body"><p class="blog-meta">By ${b.author} · ${b.category}</p><h3><a href="${b.slug||'#'}">${b.title}</a></h3><p>${b.excerpt}</p><a class="read-more" href="${b.slug||'#'}">Read More <i class="fas fa-arrow-right"></i></a></div></div>`;
+      const day = isNaN(d.getDate()) ? '' : d.getDate();
+      const mon = isNaN(d.getTime()) ? '' : d.toLocaleString('en',{month:'short'}).toUpperCase()+' '+d.getFullYear();
+      const meta = `By ${b.author} · ${b.category} · ${mon}`;
+      const safeTitle = b.title.replace(/'/g, "\'");
+      const safeExcerpt = (b.excerpt||'').replace(/'/g, "\'");
+      const safeImg = (b.image_url||'').replace(/'/g, "\'");
+      const safeMeta = meta.replace(/'/g, "\'");
+      return `<div class="blog-card">
+        <div class="blog-card-img" style="cursor:pointer" onclick="openBlogModal('${safeTitle}','${safeExcerpt}','${safeImg}','${safeMeta}')">
+          <img src="${b.image_url}" alt="${b.title}">
+          <div class="blog-date"><strong>${day}</strong><span>${mon}</span></div>
+        </div>
+        <div class="blog-card-body">
+          <p class="blog-meta">By ${b.author} · ${b.category}</p>
+          <h3><a href="javascript:void(0)" onclick="openBlogModal('${safeTitle}','${safeExcerpt}','${safeImg}','${safeMeta}')">${b.title}</a></h3>
+          <p>${b.excerpt}</p>
+          <a class="read-more" href="javascript:void(0)" onclick="openBlogModal('${safeTitle}','${safeExcerpt}','${safeImg}','${safeMeta}')">Read More <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>`;
     }).join('');
   }
 
@@ -510,5 +676,49 @@
   window.addEventListener('scroll', () => scrollBtn.classList.toggle('visible', window.scrollY > 400));
   scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 </script>
+
+<!-- BLOG MODAL -->
+<div id="blog-modal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.85);overflow-y:auto;padding:40px 20px">
+  <div style="max-width:780px;margin:0 auto;background:#fff;position:relative">
+    <button onclick="closeBlogModal()" style="position:absolute;top:16px;right:16px;background:var(--gold);border:none;color:#fff;width:36px;height:36px;font-size:18px;cursor:pointer;z-index:10;display:flex;align-items:center;justify-content:center"><i class="fas fa-times"></i></button>
+    <div id="blog-modal-img-wrap">
+      <img id="blog-modal-img" src="" alt="" style="width:100%;height:360px;object-fit:cover;display:block">
+      <div style="position:absolute;bottom:0;left:0;right:0;height:50%;background:linear-gradient(to top,rgba(0,0,0,.6),transparent)"></div>
+    </div>
+    <div style="padding:40px">
+      <p id="blog-modal-meta" style="font-size:11.5px;color:var(--gold);letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px"></p>
+      <h2 id="blog-modal-title" style="font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;color:var(--dark);line-height:1.2;margin-bottom:20px"></h2>
+      <div style="width:48px;height:2px;background:var(--gold);margin-bottom:24px"></div>
+      <p id="blog-modal-excerpt" style="font-size:15px;line-height:1.9;color:var(--text);margin-bottom:24px"></p>
+      <p style="font-size:13.5px;color:#999;font-style:italic">Contact us to learn more about this topic or to discuss your project.</p>
+      <div style="margin-top:28px">
+        <a href="#contact" onclick="closeBlogModal()" style="display:inline-flex;align-items:center;gap:10px;background:var(--gold);color:#fff;font-size:12px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;padding:13px 28px">Get In Touch <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function openBlogModal(title, excerpt, imageUrl, meta) {
+  document.getElementById('blog-modal-title').textContent = title;
+  document.getElementById('blog-modal-excerpt').textContent = excerpt;
+  document.getElementById('blog-modal-img').src = imageUrl;
+  document.getElementById('blog-modal-img').alt = title;
+  document.getElementById('blog-modal-meta').textContent = meta;
+  document.getElementById('blog-modal').style.display = 'block';
+  document.body.style.overflow = 'hidden';
+}
+function closeBlogModal() {
+  document.getElementById('blog-modal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+// Close on backdrop click
+document.getElementById('blog-modal').addEventListener('click', function(e) {
+  if (e.target === this) closeBlogModal();
+});
+// Close on ESC
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeBlogModal(); });
+</script>
+
 </body>
 </html>
