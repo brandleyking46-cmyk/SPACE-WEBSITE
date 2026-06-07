@@ -226,7 +226,7 @@
         <li><a href="#process">Process</a></li>
         <li><a href="#projects">Projects</a></li>
         <li><a href="#blog">Blog</a></li>
-        <li class="nav-cta"><a href="#contact">Contact</a></li>
+        <li class="nav-cta"><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
     <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
@@ -508,8 +508,8 @@ document.addEventListener('DOMContentLoaded', () => {
 <script type="module">
   import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 
-  const SUPABASE_URL = 'YOUR_SUPABASE_URL';
-  const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+  const SUPABASE_URL = 'https://juymlqlywzdjnzfomcqd.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp1eW1scWx5d3pkam56Zm9tY3FkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA4MTE4ODgsImV4cCI6MjA5NjM4Nzg4OH0.odnNPl4KskiNs0P12tx33YTHyZTGPUi_dPvVy7JSb3w';
   const isConfigured = SUPABASE_URL !== 'YOUR_SUPABASE_URL';
   const db = isConfigured ? createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
 
@@ -518,7 +518,7 @@ document.addEventListener('DOMContentLoaded', () => {
       { title:'Fit-Out. Done Right.', subtitle:'Interior Design Excellence', description:'Turning your ideas into functional, stylish, and ready-to-use spaces.', image_url:'https://design.eliquick.com/uploads/home_sliders/image_1771309912.jpg', btn_text:'About Company', btn_link:'#about' },
       { title:'Crafted Better', subtitle:'Quality & Creativity', description:'We believe in quality and creativity for every project we take on.', image_url:'https://design.eliquick.com/uploads/home_sliders/2.jpg', btn_text:'Our Services', btn_link:'#services' },
       { title:'Well Invented', subtitle:'Innovation & Dedication', description:'Innovation and dedication drive us to deliver exceptional solutions.', image_url:'https://design.eliquick.com/uploads/home_sliders/image_1771309775.jpg', btn_text:'Our Projects', btn_link:'#projects' },
-      { title:'Design Excellence', subtitle:'Expertise & Creativity', description:'Transforming ideas into reality with our expertise and creativity.', image_url:'https://design.eliquick.com/uploads/home_sliders/4.jpg', btn_text:'Contact Us', btn_link:'#contact' },
+      { title:'Design Excellence', subtitle:'Expertise & Creativity', description:'Transforming ideas into reality with our expertise and creativity.', image_url:'https://design.eliquick.com/uploads/home_sliders/4.jpg', btn_text:'Contact Us', btn_link:'contact.html' },
     ],
     services: [
       { title:'Residential Design', description:'Beautiful home interiors that reflect your personality and lifestyle.', image_url:'https://design.eliquick.com/uploads/home_sliders/image_1771309912.jpg', icon:'fas fa-home' },
@@ -716,7 +716,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <p id="blog-modal-excerpt" style="font-size:15px;line-height:1.9;color:var(--text);margin-bottom:24px"></p>
         <p style="font-size:13.5px;color:#999;font-style:italic">Contact us to learn more about this topic or to discuss your project.</p>
         <div style="margin-top:28px">
-          <a href="#contact" onclick="closeBlogModal()" style="display:inline-flex;align-items:center;gap:10px;background:var(--gold);color:#fff;font-size:12px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;padding:13px 28px;transition:background .3s">Get In Touch <i class="fas fa-arrow-right"></i></a>
+          <a href="contact.html" onclick="closeBlogModal()" style="display:inline-flex;align-items:center;gap:10px;background:var(--gold);color:#fff;font-size:12px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;padding:13px 28px;transition:background .3s">Get In Touch <i class="fas fa-arrow-right"></i></a>
         </div>
       </div>
     </div>

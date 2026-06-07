@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact Us — Spaceó Interiors Dubai</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --red:#cc0000; --red-light:#e53333; --dark:#0e0e0e; --dark2:#1a1a1a;
+      --light:#f7f4ef; --white:#fff; --text:#4a4a4a; --border:#e8e1d6;
+      --font-display:'Cormorant Garamond',serif; --font:'DM Sans',sans-serif;
+    }
+    html{scroll-behavior:smooth}
+    body{font-family:var(--font);background:var(--white);color:var(--text);overflow-x:hidden}
+
+    /* ── TOP BAR ── */
+    .top-bar{background:var(--dark);padding:10px 0;font-size:12px;color:rgba(255,255,255,.55)}
+    .top-bar-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:center}
+    .top-bar-social{display:flex;gap:16px}
+    .top-bar-social a{color:rgba(255,255,255,.45);font-size:13px;transition:color .3s;text-decoration:none}
+    .top-bar-social a:hover{color:var(--red)}
+
+    /* ── HEADER ── */
+    .main-header{background:var(--white);position:sticky;top:0;z-index:1000;box-shadow:0 2px 20px rgba(0,0,0,.06)}
+    .header-nav{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:72px}
+    .logo img{width:160px;display:block}
+    nav ul{list-style:none;display:flex;gap:8px}
+    nav ul li a{font-size:12.5px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--dark);text-decoration:none;padding:6px 12px;transition:color .3s}
+    nav ul li a:hover{color:var(--red)}
+    nav ul li a.active{color:var(--red)}
+    .nav-cta a{background:var(--red)!important;color:var(--white)!important;padding:8px 20px!important}
+    .nav-cta a:hover{background:var(--dark)!important}
+    .nav-toggle{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:4px}
+    .nav-toggle span{display:block;width:24px;height:2px;background:var(--dark)}
+
+    /* ── HERO BANNER ── */
+    .page-hero{
+      height:340px;
+      background:linear-gradient(rgba(10,10,10,.7),rgba(10,10,10,.7)),
+      url('https://design.eliquick.com/uploads/home_sliders/image_1771309912.jpg') center/cover no-repeat;
+      display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+    }
+    .page-hero p{font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--red);margin-bottom:14px}
+    .page-hero h1{font-family:var(--font-display);font-size:clamp(40px,6vw,72px);font-weight:300;color:var(--white);line-height:1.1}
+    .page-hero h1 span{font-style:italic;color:var(--red)}
+    .breadcrumb{margin-top:20px;font-size:12.5px;color:rgba(255,255,255,.5)}
+    .breadcrumb a{color:rgba(255,255,255,.5);text-decoration:none}
+    .breadcrumb a:hover{color:var(--red)}
+    .breadcrumb span{color:var(--red);margin:0 8px}
+
+    /* ── CONTACT SECTION ── */
+    .contact-section{padding:100px 0;background:var(--white)}
+    .contact-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1fr 1.4fr;gap:80px;align-items:start}
+
+    /* INFO SIDE */
+    .contact-info-title{font-family:var(--font-display);font-size:42px;font-weight:300;color:var(--dark);line-height:1.1;margin-bottom:16px}
+    .contact-info-title span{font-style:italic;color:var(--red)}
+    .contact-info-desc{font-size:14.5px;line-height:1.8;color:var(--text);margin-bottom:40px}
+    .info-card{display:flex;gap:18px;align-items:flex-start;margin-bottom:28px;padding:24px;border:1px solid var(--border);transition:border-color .3s}
+    .info-card:hover{border-color:var(--red)}
+    .info-icon{width:48px;height:48px;background:var(--red);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--white);font-size:16px;flex-shrink:0}
+    .info-text h4{font-family:var(--font-display);font-size:18px;font-weight:400;color:var(--dark);margin-bottom:4px}
+    .info-text p{font-size:13.5px;color:var(--text);line-height:1.6}
+    .info-text a{color:var(--text);text-decoration:none;transition:color .3s}
+    .info-text a:hover{color:var(--red)}
+    .hours-box{background:var(--dark);padding:24px 28px;margin-top:8px}
+    .hours-box h4{font-family:var(--font-display);font-size:18px;font-weight:400;color:var(--white);margin-bottom:14px}
+    .hours-row{display:flex;justify-content:space-between;font-size:13px;color:rgba(255,255,255,.6);padding:6px 0;border-bottom:1px solid rgba(255,255,255,.07)}
+    .hours-row:last-child{border-bottom:none}
+    .hours-row span{color:var(--red);font-weight:500}
+
+    /* FORM SIDE */
+    .form-box{background:var(--white);border:1px solid var(--border);padding:44px}
+    .form-box-title{font-family:var(--font-display);font-size:32px;font-weight:300;color:var(--dark);margin-bottom:6px}
+    .form-box-sub{font-size:13.5px;color:var(--text);margin-bottom:32px}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .form-group{margin-bottom:18px}
+    .form-group label{display:block;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--text);margin-bottom:8px;font-weight:500}
+    .form-group input,
+    .form-group textarea,
+    .form-group select{
+      width:100%;border:1px solid var(--border);background:var(--white);
+      color:var(--dark);padding:13px 16px;font-size:14px;font-family:var(--font);
+      outline:none;transition:border-color .3s;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus{border-color:var(--red)}
+    .form-group textarea{resize:vertical;min-height:130px}
+    .submit-btn{
+      width:100%;background:var(--red);color:var(--white);border:none;
+      padding:16px;font-size:13px;font-weight:600;letter-spacing:.1em;
+      text-transform:uppercase;cursor:pointer;font-family:var(--font);
+      display:flex;align-items:center;justify-content:center;gap:10px;
+      transition:background .3s;margin-top:8px;
+    }
+    .submit-btn:hover{background:var(--dark)}
+    .submit-btn:disabled{background:#aaa;cursor:not-allowed}
+
+    /* SUCCESS / ERROR */
+    .form-message{padding:16px 20px;font-size:14px;margin-top:16px;display:none;align-items:center;gap:12px}
+    .form-message.success{background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.3);color:#15803d}
+    .form-message.error{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.3);color:#b91c1c}
+
+    /* MAP STRIP */
+    .map-section{background:var(--light);padding:80px 0}
+    .map-inner{max-width:1200px;margin:0 auto;padding:0 24px}
+    .map-head{text-align:center;margin-bottom:40px}
+    .map-head p{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--red);margin-bottom:12px}
+    .map-head h2{font-family:var(--font-display);font-size:42px;font-weight:300;color:var(--dark)}
+    .map-head h2 span{font-style:italic;color:var(--red)}
+    .map-frame{width:100%;height:420px;border:0;filter:grayscale(20%)}
+
+    /* FOOTER */
+    footer{background:var(--dark);color:rgba(255,255,255,.6);padding:80px 0 0}
+    .footer-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:60px}
+    .footer-logo img{width:150px;margin-bottom:24px}
+    .footer-info p{font-size:13.5px;line-height:1.8;margin-bottom:10px}
+    .footer-info a{color:rgba(255,255,255,.6);text-decoration:none;transition:color .3s}
+    .footer-info a:hover{color:var(--red)}
+    .footer-info i{color:var(--red);margin-right:8px}
+    .footer-col h4{font-family:var(--font-display);font-size:20px;font-weight:400;color:var(--white);margin-bottom:24px;padding-bottom:12px;border-bottom:1px solid rgba(204,0,0,.3)}
+    .footer-links{list-style:none}
+    .footer-links li{margin-bottom:10px}
+    .footer-links a{font-size:13.5px;color:rgba(255,255,255,.55);text-decoration:none;transition:color .3s,padding-left .3s}
+    .footer-links a:hover{color:var(--red);padding-left:6px}
+    .social-row{display:flex;gap:10px;margin-top:16px}
+    .social-btn{width:40px;height:40px;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.5);display:flex;align-items:center;justify-content:center;font-size:14px;text-decoration:none;transition:all .3s}
+    .social-btn:hover{border-color:var(--red);color:var(--red)}
+    .footer-bottom{margin-top:60px;border-top:1px solid rgba(255,255,255,.07);padding:22px 24px;max-width:1200px;margin-left:auto;margin-right:auto;display:flex;justify-content:space-between;align-items:center;font-size:12.5px;color:rgba(255,255,255,.3)}
+    .footer-bottom a{color:var(--red);text-decoration:none}
+
+    /* RESPONSIVE */
+    @media(max-width:900px){
+      .contact-inner{grid-template-columns:1fr;gap:48px}
+      .footer-inner{grid-template-columns:1fr;gap:40px}
+      .form-row{grid-template-columns:1fr}
+      .form-box{padding:28px 20px}
+    }
+    @media(max-width:768px){
+      nav ul{display:none}
+      .nav-toggle{display:flex}
+      nav.open ul{display:flex;flex-direction:column;position:absolute;top:72px;left:0;right:0;background:var(--white);box-shadow:0 8px 24px rgba(0,0,0,.1);padding:16px 0}
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <div class="top-bar-inner">
+    <span>Transforming spaces into extraordinary experiences</span>
+    <div class="top-bar-social">
+      <a href="#" class="social-facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" class="social-instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="#" class="social-linkedin" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="main-header">
+  <div class="header-nav">
+    <div class="logo">
+      <a href="index.html"><img src="https://design.eliquick.com/uploads/logos/logo_1770635080.png" alt="Spaceó Interiors Dubai"></a>
+    </div>
+    <nav id="main-nav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#about">About Us</a></li>
+        <li><a href="index.html#services">Services</a></li>
+        <li><a href="index.html#projects">Projects</a></li>
+        <li><a href="index.html#blog">Blog</a></li>
+        <li class="nav-cta"><a href="contact.html" class="active">Contact</a></li>
+      </ul>
+    </nav>
+    <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <p>Get In Touch</p>
+  <h1>Contact <span>Us</span></h1>
+  <div class="breadcrumb">
+    <a href="index.html">Home</a>
+    <span>›</span>
+    Contact Us
+  </div>
+</div>
+
+<!-- CONTACT SECTION -->
+<section class="contact-section">
+  <div class="contact-inner">
+
+    <!-- LEFT: Info -->
+    <div>
+      <h2 class="contact-info-title">Let's Start Your <span>Project</span></h2>
+      <p class="contact-info-desc">Have a project in mind? Fill in your details and our team will get back to you within 24 hours with a free consultation and quote.</p>
+
+      <div class="info-card">
+        <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+        <div class="info-text">
+          <h4>Our Office</h4>
+          <p>2506, Silver Tower, Business Bay<br>Dubai, United Arab Emirates</p>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-icon"><i class="fas fa-phone"></i></div>
+        <div class="info-text">
+          <h4>Call Us</h4>
+          <p><a href="tel:+97150117260">+971 50 117 2630</a></p>
+          <p style="margin-top:4px;font-size:12px;color:#999">Available Mon–Sat, 9am–6pm</p>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-icon"><i class="fas fa-envelope"></i></div>
+        <div class="info-text">
+          <h4>Email Us</h4>
+          <p><a href="mailto:info@spaceointeriors.com">info@spaceointeriors.com</a></p>
+          <p style="margin-top:4px;font-size:12px;color:#999">We reply within 24 hours</p>
+        </div>
+      </div>
+
+      <div class="hours-box">
+        <h4><i class="fas fa-clock" style="color:var(--red);margin-right:10px"></i>Working Hours</h4>
+        <div class="hours-row"><div>Monday – Friday</div><span>9:00 AM – 6:00 PM</span></div>
+        <div class="hours-row"><div>Saturday</div><span>9:00 AM – 2:00 PM</span></div>
+        <div class="hours-row"><div>Sunday</div><span>Closed</span></div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Form -->
+    <div class="form-box">
+      <h3 class="form-box-title">Get a Free Quote</h3>
+      <p class="form-box-sub">Fill in the form below and we'll get back to you as soon as possible.</p>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>First Name *</label>
+          <input type="text" id="f-firstname" placeholder="John" required>
+        </div>
+        <div class="form-group">
+          <label>Last Name *</label>
+          <input type="text" id="f-lastname" placeholder="Smith" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Email Address *</label>
+          <input type="email" id="f-email" placeholder="john@example.com" required>
+        </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" id="f-phone" placeholder="+971 50 000 0000">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Service Interested In</label>
+        <select id="f-service">
+          <option value="">— Select a Service —</option>
+          <option value="Residential Design">Residential Design</option>
+          <option value="Commercial Design">Commercial Design</option>
+          <option value="Hospitality Design">Hospitality Design</option>
+          <option value="Renovation">Renovation / Fit-Out</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Project Location</label>
+        <input type="text" id="f-location" placeholder="e.g. Business Bay, Dubai">
+      </div>
+
+      <div class="form-group">
+        <label>Budget Range</label>
+        <select id="f-budget">
+          <option value="">— Select Budget —</option>
+          <option value="Under AED 50,000">Under AED 50,000</option>
+          <option value="AED 50,000 – 150,000">AED 50,000 – 150,000</option>
+          <option value="AED 150,000 – 500,000">AED 150,000 – 500,000</option>
+          <option value="AED 500,000+">AED 500,000+</option>
+          <option value="To be discussed">To be discussed</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Tell Us About Your Project *</label>
+        <textarea id="f-message" placeholder="Describe your project, space size, style preferences, timeline..."></textarea>
+      </div>
+
+      <button class="submit-btn" id="submit-btn" onclick="submitForm()">
+        <i class="fas fa-paper-plane"></i> Send Message & Get Quote
+      </button>
+
+      <div class="form-message success" id="form-success">
+        <i class="fas fa-check-circle" style="font-size:20px"></i>
+        <div>
+          <strong>Message sent successfully!</strong><br>
+          Thank you! Our team will contact you within 24 hours.
+        </div>
+      </div>
+      <div class="form-message error" id="form-error">
+        <i class="fas fa-exclamation-circle" style="font-size:20px"></i>
+        <div>
+          <strong>Something went wrong.</strong><br>
+          <span id="error-detail">Please try again or email us directly.</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- MAP -->
+<section class="map-section">
+  <div class="map-inner">
+    <div class="map-head">
+      <p>Find Us</p>
+      <h2>Our <span>Location</span></h2>
+    </div>
+    <iframe
+      class="map-frame"
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3610.1785744433!2d55.2644!3d25.1865!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f69225dce3b3f%3A0x9e4a5a9a6b7c8d0a!2sSilver%20Tower%2C%20Business%20Bay%2C%20Dubai!5e0!3m2!1sen!2sae!4v1"
+      allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo"><img src="https://design.eliquick.com/uploads/logos/logo_1770635080.png" alt="Spaceó Interiors Dubai"></div>
+      <div class="footer-info">
+        <p><i class="fas fa-map-marker-alt"></i>2506, Silver Tower, Business Bay, Dubai, UAE</p>
+        <p><i class="fas fa-phone"></i><a href="tel:+97150117260">+971 50 117 2630</a></p>
+        <p><i class="fas fa-envelope"></i><a href="mailto:info@spaceointeriors.com">info@spaceointeriors.com</a></p>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul class="footer-links">
+        <li><a href="index.html#about">About Us</a></li>
+        <li><a href="index.html#services">Services</a></li>
+        <li><a href="index.html#projects">Projects</a></li>
+        <li><a href="index.html#blog">Blog</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Connect With Us</h4>
+      <p style="font-size:13.5px;line-height:1.7;margin-bottom:16px">Follow us on social media for the latest projects and updates.</p>
+      <div class="social-row">
+        <a class="social-btn social-facebook" href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a class="social-btn social-twitter" href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+        <a class="social-btn social-instagram" href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a class="social-btn social-linkedin" href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 <a href="index.html">Spaceó Interiors Dubai</a>. All rights reserved.</p>
+    <p>Powered by <a href="https://deepnet.co.ke/" target="_blank">Deepnet</a></p>
+  </div>
+</footer>
+
+<!-- FORMSPREE FORM SUBMIT (free email service — no backend needed) -->
+<script>
+  // ── Mobile nav ──
+  document.getElementById('navToggle').addEventListener('click', () => {
+    document.getElementById('main-nav').classList.toggle('open');
+  });
+
+  // ── FORM SUBMIT via Formspree ──
+  // Formspree is free, sends form data directly to your email
+  // SETUP: Go to formspree.io → sign up free → New Form → copy your endpoint
+  // Replace 'YOUR_FORMSPREE_ID' below with your actual ID e.g. 'xpzgkqla'
+  // ══════════════════════════════════════════════════════
+  // TO ACTIVATE EMAIL: 
+  // 1. Go to formspree.io → sign up → New Form
+  // 2. Copy your Form ID and replace the text below
+  // 3. Example: const FORMSPREE_ID = 'xpzgkqla';
+  // ══════════════════════════════════════════════════════
+  const FORMSPREE_ID = 'YOUR_FORMSPREE_ID'; // ← REPLACE THIS
+
+  async function submitForm() {
+    const btn = document.getElementById('submit-btn');
+    const successEl = document.getElementById('form-success');
+    const errorEl = document.getElementById('form-error');
+    successEl.style.display = 'none';
+    errorEl.style.display = 'none';
+
+    // Collect values
+    const firstName = document.getElementById('f-firstname').value.trim();
+    const lastName  = document.getElementById('f-lastname').value.trim();
+    const email     = document.getElementById('f-email').value.trim();
+    const phone     = document.getElementById('f-phone').value.trim();
+    const service   = document.getElementById('f-service').value;
+    const location  = document.getElementById('f-location').value.trim();
+    const budget    = document.getElementById('f-budget').value;
+    const message   = document.getElementById('f-message').value.trim();
+
+    // Validate
+    if (!firstName || !lastName || !email || !message) {
+      errorEl.style.display = 'flex';
+      document.getElementById('error-detail').textContent = 'Please fill in all required fields (marked with *).';
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      errorEl.style.display = 'flex';
+      document.getElementById('error-detail').textContent = 'Please enter a valid email address.';
+      return;
+    }
+
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Sending...';
+
+    // Check if Formspree is configured
+    if (FORMSPREE_ID === 'YOUR_FORMSPREE_ID') {
+      // Demo mode - show success but warn
+      setTimeout(() => {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message & Get Quote';
+        successEl.style.display = 'flex';
+        successEl.querySelector('div').innerHTML = '<strong>Demo mode!</strong><br>Set up Formspree to enable real email sending. See setup instructions below.';
+        clearForm();
+      }, 1200);
+      return;
+    }
+
+    try {
+      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          name: `${firstName} ${lastName}`,
+          email,
+          phone: phone || 'Not provided',
+          service: service || 'Not specified',
+          location: location || 'Not specified',
+          budget: budget || 'Not specified',
+          message,
+          _subject: `New Quote Request from ${firstName} ${lastName} — Spaceó Interiors`,
+          _replyto: email,
+        })
+      });
+
+      if (res.ok) {
+        successEl.style.display = 'flex';
+        clearForm();
+      } else {
+        throw new Error('Server error');
+      }
+    } catch (err) {
+      errorEl.style.display = 'flex';
+      document.getElementById('error-detail').textContent = 'Failed to send. Please email us directly at info@spaceointeriors.com';
+    }
+
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message & Get Quote';
+  }
+
+  function clearForm() {
+    ['f-firstname','f-lastname','f-email','f-phone','f-location','f-message'].forEach(id => {
+      document.getElementById(id).value = '';
+    });
+    document.getElementById('f-service').selectedIndex = 0;
+    document.getElementById('f-budget').selectedIndex = 0;
+  }
+
+  // Enter key support
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && e.ctrlKey) submitForm();
+  });
+</script>
+
+<!-- SETUP INSTRUCTIONS (hidden comment for developer) -->
+<!--
+  ════════════════════════════════════════════
+  EMAIL SETUP — FORMSPREE (FREE)
+  ════════════════════════════════════════════
+  1. Go to https://formspree.io
+  2. Sign up with info@spaceointeriors.com
+  3. Click "New Form"
+  4. Name it "Spaceo Contact Form"
+  5. Copy your Form ID (e.g. xpzgkqla)
+  6. Replace 'YOUR_FORMSPREE_ID' above with it
+  7. All form submissions will arrive at
+     info@spaceointeriors.com automatically
+  ════════════════════════════════════════════
+-->
+
+</body>
+</html>
